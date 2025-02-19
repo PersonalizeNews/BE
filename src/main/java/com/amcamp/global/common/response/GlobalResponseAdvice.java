@@ -1,4 +1,4 @@
-package com.amcamp.global;
+package com.amcamp.global.common.response;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.MethodParameter;

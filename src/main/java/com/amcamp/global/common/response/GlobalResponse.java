@@ -1,4 +1,4 @@
-package com.amcamp.global;
+package com.amcamp.global.common.response;
 
 import java.time.LocalDateTime;
 
