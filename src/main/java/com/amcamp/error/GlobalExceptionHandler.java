@@ -15,7 +15,6 @@ public class GlobalExceptionHandler {
 
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .status(errorCode.getHttpStatus())
-                .code(errorCode.getCode())
                 .message(errorCode.getMessage())
                 .build();
 
