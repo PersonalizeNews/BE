@@ -2,6 +2,7 @@ package com.amcamp.error;
 
 import com.amcamp.error.exception.CustomException;
 import com.amcamp.error.exception.ErrorCode;
+import com.amcamp.global.GlobalResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -10,14 +11,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<ErrorResponse> handleCustomException(CustomException e) {
+    public ResponseEntity<GlobalResponse> handleCustomException(CustomException e) {
         final ErrorCode errorCode = e.getErrorCode();
-
-        ErrorResponse errorResponse = ErrorResponse.builder()
+        final ErrorResponse errorResponse = ErrorResponse.builder()
                 .status(errorCode.getHttpStatus())
                 .message(errorCode.getMessage())
                 .build();
 
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(errorResponse);
+        final GlobalResponse response = GlobalResponse.
+                fail(errorCode.getHttpStatus().value(), errorResponse);
+
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(response);
     }
 }
