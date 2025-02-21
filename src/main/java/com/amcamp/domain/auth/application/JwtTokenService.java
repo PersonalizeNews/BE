@@ -3,7 +3,7 @@ package com.amcamp.domain.auth.application;
 import com.amcamp.domain.auth.dao.RefreshTokenRepository;
 import com.amcamp.domain.auth.domain.RefreshToken;
 import com.amcamp.domain.member.domain.MemberRole;
-import com.amcamp.global.common.util.JwtUtil;
+import com.amcamp.global.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

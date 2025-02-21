@@ -1,4 +1,4 @@
-package com.amcamp.global.common.util;
+package com.amcamp.global.util;
 
 import com.amcamp.domain.auth.dto.AccessTokenDto;
 import com.amcamp.domain.auth.dto.RefreshTokenDto;
