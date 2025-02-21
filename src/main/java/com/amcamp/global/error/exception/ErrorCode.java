@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
 
-    AUTH_NOT_FOUND(HttpStatus.INTERNAL_SERVER_ERROR, "AUTH INFO NOT FOUND"),
-    TOKEN_VERIFICATION_FAILED(HttpStatus.UNAUTHORIZED, "FAIL_TO_VERIFY_TOKEN");
+    ID_TOKEN_VERIFICATION_FAILED(HttpStatus.UNAUTHORIZED, "ID 토큰 검증에 실패했습니다."),
+    ;
 
     private final HttpStatus httpStatus;
     private final String message;
