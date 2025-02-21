@@ -1,4 +1,4 @@
-package com.amcamp.global.common.config.security;
+package com.amcamp.global.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

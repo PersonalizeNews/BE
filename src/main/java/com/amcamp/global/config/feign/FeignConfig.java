@@ -1,4 +1,4 @@
-package com.amcamp.global.common.config.feign;
+package com.amcamp.global.config.feign;
 
 import feign.RequestInterceptor;
 import org.springframework.cloud.openfeign.EnableFeignClients;
