@@ -30,6 +30,10 @@ public class JwtUtil {
         return buildRefreshToken(memberId, issuedAt, expiredAt);
     }
 
+    public long getRefreshTokenExpirationTime() {
+        return jwtProperties.refreshTokenExpirationTime();
+    }
+
     private Key getAccessTokenKey() {
         return Keys.hmacShaKeyFor(jwtProperties.accessTokenSecret().getBytes());
     }
