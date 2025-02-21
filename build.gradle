@@ -38,6 +38,12 @@ dependencies {
 
     // Redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // Spring Cloud
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:2024.0.0")
+
+    // Spring Cloud Open Feign
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 }
 
 tasks.named('test') {
