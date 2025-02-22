@@ -42,7 +42,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // AT가 유효하면 통과
             if (accessTokenDto != null) {
                 setAuthenticationToken(accessTokenDto.memberId(), accessTokenDto.role());
+
                 filterChain.doFilter(request, response);
+                return;
             }
         }
 
