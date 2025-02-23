@@ -29,3 +29,9 @@ jwt:
   access-token-expiration-time: ${JWT_ACCESS_TOKEN_EXPIRATION_TIME:7200}
   refresh-token-expiration-time: ${JWT_REFRESH_TOKEN_EXPIRATION_TIME:172800}
   issuer: ${JWT_ISSUER}
+
+gemini:
+  baseurl: ${GEMINI_BASEURL}
+googleapi:
+  api:
+    key: ${GEMINI_API_KEY}
