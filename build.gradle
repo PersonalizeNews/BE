@@ -55,6 +55,9 @@ dependencies {
 
     // MySQL
     implementation 'mysql:mysql-connector-java:8.0.33'
+
+    // Spotify
+    implementation 'se.michaelthelin.spotify:spotify-web-api-java:8.4.1'
 }
 
 tasks.named('test') {
