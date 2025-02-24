@@ -52,6 +52,9 @@ dependencies {
 
     // Oauth2 Jose
     implementation 'org.springframework.security:spring-security-oauth2-jose'
+
+    // MySQL
+    implementation 'mysql:mysql-connector-java:8.0.33'
 }
 
 tasks.named('test') {
