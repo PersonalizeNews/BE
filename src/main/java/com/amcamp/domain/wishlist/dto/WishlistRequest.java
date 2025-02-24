@@ -1,13 +1,15 @@
 package com.amcamp.domain.wishlist.dto;
 
+
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@NoArgsConstructor
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WishlistRequest {
-    private String trackName;
-    private String artist;
-    private String spotifyId;
-    private String albumCoverUrl;
+    private String title;
+    private String description;
 }
