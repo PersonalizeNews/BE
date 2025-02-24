@@ -68,8 +68,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // AT, RT가 모두 만료된 경우 실패
         filterChain.doFilter(request, response);
-
-        filterChain.doFilter(request, response);
     }
 
     private void setAuthenticationToken(Long memberId, MemberRole role) {
