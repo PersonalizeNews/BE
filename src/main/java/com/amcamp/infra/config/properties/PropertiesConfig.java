@@ -4,6 +4,7 @@ import com.amcamp.infra.config.chat.ChatProperties;
 import com.amcamp.infra.config.jwt.JwtProperties;
 import com.amcamp.infra.config.oauth.KakaoProperties;
 import com.amcamp.infra.config.redis.RedisProperties;
+import com.amcamp.infra.config.spotify.SpotifyProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
         KakaoProperties.class,
         JwtProperties.class,
         ChatProperties.class,
+        SpotifyProperties.class,
 })
 @Configuration
 public class PropertiesConfig {
