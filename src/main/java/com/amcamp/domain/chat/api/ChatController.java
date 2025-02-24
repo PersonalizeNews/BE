@@ -2,6 +2,8 @@ package com.amcamp.domain.chat.api;
 
 import com.amcamp.domain.chat.application.ChatService;
 import com.amcamp.domain.chat.application.PromptGenerator;
+import com.amcamp.domain.chat.dto.response.GenreRecommendationResponse;
+import com.amcamp.global.util.MemberUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +20,14 @@ import java.util.Map;
 public class ChatController {
 
     private final ChatService chatService;
-    private final PromptGenerator promptGenerator;
 
     @PostMapping("/recommendation")
-    public ResponseEntity<?> getRecommendation(@RequestBody Map<String, String> request) {
+    public GenreRecommendationResponse getRecommendation(@RequestBody Map<String, String> request) {
         String input = request.get("input");
-        String message = promptGenerator.generatePrompt(input);
-        String responseMessage = chatService.getCompletion(message);
+        String genre = chatService.getRecommendGenre(input);
 
-        return ResponseEntity.ok(Collections.singletonMap("answer", responseMessage));
+        return new GenreRecommendationResponse(genre); //DTO만 반환하게 하기
     }
+
+
 }
