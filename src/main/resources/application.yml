@@ -6,3 +6,4 @@ spring:
     include:
       - security
       - redis
+      - gemini
