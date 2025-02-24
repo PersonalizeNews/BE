@@ -1,46 +1,26 @@
 package com.amcamp.domain.wishlist.application;
 
-import com.amcamp.domain.member.dao.MemberRepository;
 import com.amcamp.domain.member.domain.Member;
 import com.amcamp.domain.wishlist.dao.WishlistRepository;
 import com.amcamp.domain.wishlist.domain.Wishlist;
-import com.amcamp.domain.wishlist.dto.WishlistRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.amcamp.domain.wishlist.dto.request.WishlistCreateRequest;
+import com.amcamp.domain.wishlist.dto.response.WishlistInfoResponse;
+import com.amcamp.global.util.MemberUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class WishlistService {
     private final WishlistRepository wishlistRepository;
-    private final MemberRepository memberRepository;
+    private final MemberUtil memberUtil;
 
-    @Autowired
-    public WishlistService(WishlistRepository wishlistRepository, MemberRepository memberRepository) {
-        this.wishlistRepository = wishlistRepository;
-        this.memberRepository = memberRepository;
-    }
-
-    public Wishlist createWishlist(Long memberId, WishlistRequest request) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Member not found"));
-
-        Wishlist wishlist = Wishlist.from(member, request);
-        return wishlistRepository.save(wishlist);
-    }
-
-    public Wishlist getWishlistById(Long wishlistId) {
-        return wishlistRepository.findById(wishlistId)
-                .orElseThrow(() -> new RuntimeException("Wishlist not found"));
-    }
-
-    public List<Wishlist> getUserWishlist(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Member not found"));
-
-        return wishlistRepository.findByMember(member);
+    public WishlistInfoResponse createWishlist(WishlistCreateRequest request) {
+        Member member = memberUtil.getCurrentMember();
+        Wishlist wishlist = wishlistRepository.save(Wishlist.createWishlist(member, request.title()));
+        return new WishlistInfoResponse(wishlist.getId(), wishlist.getTitle());
     }
 }
 

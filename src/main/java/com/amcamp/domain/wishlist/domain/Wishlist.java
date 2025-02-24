@@ -3,16 +3,15 @@ package com.amcamp.domain.wishlist.domain;
 
 import com.amcamp.domain.common.model.BaseTimeEntity;
 import com.amcamp.domain.member.domain.Member;
-import com.amcamp.domain.wishlist.dto.WishlistRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "wishlist")
 public class Wishlist extends BaseTimeEntity {
 
     @Id
@@ -23,20 +22,17 @@ public class Wishlist extends BaseTimeEntity {
     @Column(nullable = false, length = 50)
     private String title;
 
-    @Column(nullable = false, length = 50)
-    private String description;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    public Wishlist(Member member, String title, String description) {
+    @Builder(access = AccessLevel.PRIVATE)
+    private Wishlist(Member member, String title) {
         this.member = member;
         this.title = title;
-        this.description = description;
     }
 
-    public static Wishlist from(Member member, WishlistRequest request) {
-        return new Wishlist(member, request.getTitle(), request.getDescription());
+    public static Wishlist createWishlist(Member member, String title) {
+        return Wishlist.builder().member(member).title(title).build();
     }
 }
