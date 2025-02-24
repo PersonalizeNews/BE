@@ -15,8 +15,10 @@ import se.michaelthelin.spotify.model_objects.specification.*;
 import se.michaelthelin.spotify.requests.data.search.simplified.SearchTracksRequest;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import static com.neovisionaries.i18n.CountryCode.KR;
 
@@ -33,16 +35,9 @@ public class SpotifyService {
 
         Track[] tracks = getTrackInfoByGenre(genres);
 
-        Set<String> uniqueTrackTitles = new HashSet<>();
-        List<SpotifySearchResponse> list = new ArrayList<>();
-
-        Arrays.stream(tracks)
+        return Arrays.stream(tracks)
                 .map(this::getTrackData)
-                .distinct()
-                .filter(trackData -> uniqueTrackTitles.add(trackData.title()))
-                .forEach(list::add);
-
-        return list;
+                .toList();
     }
 
     /*
@@ -54,20 +49,30 @@ public class SpotifyService {
                     .setAccessToken(spotifyConfig.generateAccessToken())
                     .build();
 
-            String genreQuery = genres.stream()
-                    .map(genre -> "genre:" + genre)
-                    .collect(Collectors.joining(" OR "));
+            Set<Track> uniqueTracks = new LinkedHashSet<>();
 
-            String query = genreQuery + " year:2024-2025";
+            for (String genre : genres) {
+                String query = "genre:" + genre + " year:2024-2025";
 
-            SearchTracksRequest searchTrackRequest = spotifyApi.searchTracks(query)
-                    .market(KR)
-                    .limit(10)
-                    .build();
+                SearchTracksRequest searchTrackRequest = spotifyApi.searchTracks(query)
+                        .market(KR)
+                        .limit(10)
+                        .build();
 
-            Paging<Track> searchResult = searchTrackRequest.execute();
+                Paging<Track> searchResult = searchTrackRequest.execute();
 
-            return searchResult.getItems();
+                List<Track> selectedTracks = Arrays.stream(searchResult.getItems())
+                        .limit(3)
+                        .toList();
+
+                uniqueTracks.addAll(selectedTracks);
+
+                if (uniqueTracks.size() >= 10) {
+                    break;
+                }
+            }
+
+            return uniqueTracks.toArray(new Track[0]);
         } catch (IOException | ParseException | SpotifyWebApiException e) {
             throw new CustomException(ErrorCode.SPOTIFY_EXCEPTION);
         }
