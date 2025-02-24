@@ -57,6 +57,7 @@ public class WebSecurityConfig {
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.setAllowCredentials(true);
+        configuration.addAllowedOriginPattern("http://localhost:5173");
         configuration.addExposedHeader(SET_COOKIE);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
