@@ -26,7 +26,7 @@ public class ChatController {
         String input = request.get("input");
         String genre = chatService.getRecommendGenre(input);
 
-        return new GenreRecommendationResponse(genre); //DTO만 반환하게 하기
+        return new GenreRecommendationResponse(genre);
     }
 
 
