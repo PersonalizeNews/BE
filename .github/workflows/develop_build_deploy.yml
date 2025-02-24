@@ -1,6 +1,9 @@
 name: Build and Deploy to Develop
 
 on:
+  pull_request:
+    branches:
+      - develop
   push:
     branches:
       - develop
