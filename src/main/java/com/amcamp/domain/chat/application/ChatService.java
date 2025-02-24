@@ -17,11 +17,11 @@ public class ChatService {
 
     private static final String MODEL = "gemini-pro";
 
-    public ChatResponse getCompletion(ChatRequest request) {
+    private ChatResponse getCompletion(ChatRequest request) {
         return chatInterface.getCompletion(MODEL, request);
     }
 
-    public String getCompletion(String text) {
+    private String getCompletion(String text) {
         ChatResponse response = getCompletion(new ChatRequest(text));
 
         return response.getCandidates()
