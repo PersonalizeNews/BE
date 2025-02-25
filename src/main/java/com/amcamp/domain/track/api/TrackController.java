@@ -3,6 +3,7 @@ package com.amcamp.domain.track.api;
 import com.amcamp.domain.track.application.TrackService;
 import com.amcamp.domain.track.dto.request.TrackCreateRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,6 @@ public class TrackController {
     @PostMapping
     public ResponseEntity<Void> trackCreate(@RequestBody List<TrackCreateRequest> request) {
         trackService.createTrack(request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
