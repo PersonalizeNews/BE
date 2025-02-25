@@ -39,6 +39,15 @@ public class TrackService {
         trackRepository.saveAll(tracks);
     }
 
+    public void deleteTrack(Long trackId) {
+        final Member currentMember = memberUtil.getCurrentMember();
+        final Track track = findTrackById(trackId);
+
+        validateTrackMemberMismatch(track, currentMember);
+
+        trackRepository.deleteById(trackId);
+    }
+
     private Wishlist findWishlistById(Long wishlistId) {
         return wishlistRepository.findById(wishlistId)
                 .orElseThrow(() -> new CustomException(ErrorCode.WISHLIST_NOT_FOUND));
@@ -47,6 +56,17 @@ public class TrackService {
     private void validateWishlistMemberMismatch(Wishlist wishlist, Member member) {
         if (!wishlist.getMember().getId().equals(member.getId())) {
             throw new CustomException(ErrorCode.WISHLIST_MEMBER_MISMATCH);
+        }
+    }
+
+    private Track findTrackById(Long trackId) {
+        return trackRepository.findById(trackId)
+                .orElseThrow(() -> new CustomException(ErrorCode.TRACK_NOT_FOUND));
+    }
+
+    private void validateTrackMemberMismatch(Track track, Member member) {
+        if (!track.getWishlist().getMember().getId().equals(member.getId())) {
+            throw new CustomException(ErrorCode.TRACK_MEMBER_MISMATCH);
         }
     }
 }

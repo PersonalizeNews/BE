@@ -17,6 +17,9 @@ public enum ErrorCode {
 
     WISHLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "위시리스트를 찾을 수 없습니다."),
     WISHLIST_MEMBER_MISMATCH(HttpStatus.FORBIDDEN, "위시리스트를 생성한 유저와 로그인된 계정이 일치하지 않습니다"),
+
+    TRACK_NOT_FOUND(HttpStatus.NOT_FOUND, "트랙을 찾을 수 없습니다."),
+    TRACK_MEMBER_MISMATCH(HttpStatus.FORBIDDEN, "트랙을 생성한 유저와 로그인된 계정이 일치하지 않습니다."),
     ;
 
     private final HttpStatus httpStatus;

@@ -5,10 +5,7 @@ import com.amcamp.domain.track.dto.request.TrackCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,11 @@ public class TrackController {
     public ResponseEntity<Void> trackCreate(@RequestBody List<TrackCreateRequest> request) {
         trackService.createTrack(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/{trackId}")
+    public ResponseEntity<Void> trackDelete(@PathVariable Long trackId) {
+        trackService.deleteTrack(trackId);
+        return ResponseEntity.ok().build();
     }
 }
