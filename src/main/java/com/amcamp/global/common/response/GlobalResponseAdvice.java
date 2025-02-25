@@ -31,6 +31,10 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice {
         int status = servletResponse.getStatus();
         HttpStatus resolve = HttpStatus.resolve(status);
 
+        if (body instanceof byte[]) {
+            return body;
+        }
+
         if (resolve == null || body instanceof String) {
             return body;
         }
