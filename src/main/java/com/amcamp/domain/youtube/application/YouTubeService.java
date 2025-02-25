@@ -1,6 +1,7 @@
 package com.amcamp.domain.youtube.application;
 
 import com.amcamp.domain.youtube.dto.response.YouTubeVideoIdResponse;
+import com.amcamp.global.util.MemberUtil;
 import com.amcamp.infra.config.youtube.YoutubeProperties;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -19,9 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class YouTubeService {
 
+    private final MemberUtil memberUtil;
     private final YoutubeProperties youtubeProperties;
 
     public YouTubeVideoIdResponse getYouTubeLink(String query) throws IOException {
+        memberUtil.getCurrentMember();
 
         YouTube youtube = new YouTube.Builder(
                 new NetHttpTransport(),
