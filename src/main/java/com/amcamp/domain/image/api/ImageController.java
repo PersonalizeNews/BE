@@ -21,9 +21,9 @@ public class ImageController {
     private final ImageService imageService;
 
     @PostMapping
-    public WriteResult uploadImage(@RequestParam("wishlistId") String wishlistId,
-                                   @RequestParam("files") MultipartFile file) {
-        return imageService.uploadWishlistImage(file, wishlistId);
+    public void uploadImage(@RequestPart("wishlistId") String wishlistId,
+                            @RequestPart("files") MultipartFile file) {
+        imageService.uploadWishlistImage(file, wishlistId);
     }
 
     @GetMapping

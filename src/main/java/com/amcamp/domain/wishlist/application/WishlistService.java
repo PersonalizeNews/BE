@@ -20,7 +20,7 @@ public class WishlistService {
     private final MemberUtil memberUtil;
     private final ImageService imageService;
 
-    public WishlistInfoResponse createWishlist(String title, MultipartFile file) {
+    public void createWishlist(String title, MultipartFile file) {
         Member member = memberUtil.getCurrentMember();
 
         String imageUrl = imageService.uploadInitWishlistImage(file);
@@ -28,7 +28,7 @@ public class WishlistService {
         Wishlist wishlist = wishlistRepository.save(Wishlist.createWishlist(member, title, imageUrl));
         imageService.storeImageInfo(imageUrl, wishlist.getId().toString());
 
-        return new WishlistInfoResponse(wishlist.getId(), wishlist.getTitle(), wishlist.getImageUrl());
+        new WishlistInfoResponse(wishlist.getId(), wishlist.getTitle(), wishlist.getImageUrl());
     }
 }
 

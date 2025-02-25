@@ -35,7 +35,7 @@ public class ImageService {
     private final WishlistRepository wishlistRepository;
 
     @Transactional
-    public WriteResult uploadWishlistImage(MultipartFile file, String wishlistId) {
+    public void uploadWishlistImage(MultipartFile file, String wishlistId) {
         memberUtil.getCurrentMember();
 
         try {
@@ -52,8 +52,6 @@ public class ImageService {
             } else {
                 throw new CustomException(ErrorCode.WISHLIST_NOT_FOUND);
             }
-
-            return writeResult;
         } catch (Exception e) {
             throw new CustomException(ErrorCode.FIREBASE_UPLOAD_EXCEPTION);
         }

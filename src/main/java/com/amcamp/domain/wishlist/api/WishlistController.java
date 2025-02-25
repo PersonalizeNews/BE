@@ -15,8 +15,8 @@ public class WishlistController {
     private final WishlistService wishlistService;
 
     @PostMapping
-    public WishlistInfoResponse createWishlist(@RequestPart("title") String title,
-                                               @RequestPart("image") MultipartFile file){
-       return wishlistService.createWishlist(title, file);
+    public void createWishlist(@RequestPart("title") String title,
+                               @RequestPart("image") MultipartFile file){
+       wishlistService.createWishlist(title, file);
     }
 }
