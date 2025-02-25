@@ -4,6 +4,7 @@ import com.amcamp.domain.member.domain.Member;
 import com.amcamp.domain.track.dao.TrackRepository;
 import com.amcamp.domain.track.domain.Track;
 import com.amcamp.domain.track.dto.request.TrackCreateRequest;
+import com.amcamp.domain.track.dto.response.TrackInfoResponse;
 import com.amcamp.domain.wishlist.dao.WishlistRepository;
 import com.amcamp.domain.wishlist.domain.Wishlist;
 import com.amcamp.global.error.exception.CustomException;
@@ -46,6 +47,19 @@ public class TrackService {
         validateTrackMemberMismatch(track, currentMember);
 
         trackRepository.deleteById(trackId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<TrackInfoResponse> findAllTrack(Long wishlistId) {
+        final Member currentMember = memberUtil.getCurrentMember();
+        final Wishlist wishlist = findWishlistById(wishlistId);
+
+        validateWishlistMemberMismatch(wishlist, currentMember);
+
+        return trackRepository.findAllByWishlistId(wishlist.getId())
+                .stream()
+                .map(TrackInfoResponse::from)
+                .toList();
     }
 
     private Wishlist findWishlistById(Long wishlistId) {
