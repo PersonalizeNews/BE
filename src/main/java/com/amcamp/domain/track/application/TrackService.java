@@ -25,19 +25,15 @@ public class TrackService {
     private final WishlistRepository wishlistRepository;
     private final TrackRepository trackRepository;
 
-    public void createTrack(List<TrackCreateRequest> requests) {
+    public void createTrack(TrackCreateRequest request) {
         final Member currentMember = memberUtil.getCurrentMember();
+        final Wishlist wishlist = findWishlistById(request.wishlistId());
 
-        List<Track> tracks = requests.stream()
-                .map(request -> {
-                    Wishlist wishlist = findWishlistById(request.wishlistId());
-                    validateWishlistMemberMismatch(wishlist, currentMember);
-                    return Track.createTrack(
-                            request.artistName(), request.title(), request.albumName(), request.imageUrl(), wishlist);
-                })
-                .toList();
+        validateWishlistMemberMismatch(wishlist, currentMember);
 
-        trackRepository.saveAll(tracks);
+        trackRepository.save(
+                Track.createTrack(
+                        request.artistName(), request.title(), request.albumName(), request.imageUrl(), wishlist));
     }
 
     public void deleteTrack(Long trackId) {
