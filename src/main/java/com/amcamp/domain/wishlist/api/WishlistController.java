@@ -5,16 +5,18 @@ import com.amcamp.domain.wishlist.dto.request.WishlistCreateRequest;
 import com.amcamp.domain.wishlist.dto.response.WishlistInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/wishlist")
 @RequiredArgsConstructor
 public class WishlistController {
+
     private final WishlistService wishlistService;
 
-
     @PostMapping
-    public WishlistInfoResponse createWishlist(@RequestBody WishlistCreateRequest request){
-       return wishlistService.createWishlist(request);
+    public WishlistInfoResponse createWishlist(@RequestPart("title") String title,
+                                               @RequestPart("image") MultipartFile file){
+       return wishlistService.createWishlist(title, file);
     }
 }

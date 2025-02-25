@@ -8,4 +8,5 @@ spring:
       - redis
       - gemini
       - spotify
+      - firebase
       - youtube

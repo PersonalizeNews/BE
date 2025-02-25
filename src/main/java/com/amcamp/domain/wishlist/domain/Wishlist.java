@@ -22,17 +22,21 @@ public class Wishlist extends BaseTimeEntity {
     @Column(nullable = false, length = 50)
     private String title;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @Builder(access = AccessLevel.PRIVATE)
-    private Wishlist(Member member, String title) {
+    private Wishlist(Member member, String title, String imageUrl) {
         this.member = member;
         this.title = title;
+        this.imageUrl = imageUrl;
     }
 
-    public static Wishlist createWishlist(Member member, String title) {
-        return Wishlist.builder().member(member).title(title).build();
+    public static Wishlist createWishlist(Member member, String title, String imageUrl) {
+        return Wishlist.builder().member(member).title(title).imageUrl(imageUrl).build();
     }
 }

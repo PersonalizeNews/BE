@@ -1,6 +1,7 @@
 package com.amcamp.infra.config.properties;
 
 import com.amcamp.infra.config.chat.ChatProperties;
+import com.amcamp.infra.config.image.FirebaseProperties;
 import com.amcamp.infra.config.jwt.JwtProperties;
 import com.amcamp.infra.config.oauth.KakaoProperties;
 import com.amcamp.infra.config.redis.RedisProperties;
