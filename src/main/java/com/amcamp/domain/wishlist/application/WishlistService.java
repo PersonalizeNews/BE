@@ -62,12 +62,12 @@ public class WishlistService {
         validateOwnership(wishlist, currentMember);
 
         if (title != null && !title.isBlank()) {
-            wishlist.setTitle(title);
+            wishlist.updateTitle(title);
         }
 
         if (file != null && !file.isEmpty()) {
             String imageUrl = imageService.uploadInitWishlistImage(file);
-            wishlist.setImageUrl(imageUrl);
+            wishlist.updateImageUrl(imageUrl);
             imageService.storeImageInfo(imageUrl, wishlist.getId().toString());
         }
     }

@@ -45,4 +45,12 @@ public class Wishlist extends BaseTimeEntity {
     public static Wishlist createWishlist(Member member, String title, String imageUrl) {
         return Wishlist.builder().member(member).title(title).imageUrl(imageUrl).build();
     }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
