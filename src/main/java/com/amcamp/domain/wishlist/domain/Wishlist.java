@@ -4,12 +4,10 @@ package com.amcamp.domain.wishlist.domain;
 import com.amcamp.domain.common.model.BaseTimeEntity;
 import com.amcamp.domain.member.domain.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Wishlist extends BaseTimeEntity {

@@ -16,7 +16,8 @@ import org.springframework.context.annotation.Configuration;
         JwtProperties.class,
         ChatProperties.class,
         SpotifyProperties.class,
-        YoutubeProperties.class
+        YoutubeProperties.class,
+        FirebaseProperties.class,
 })
 @Configuration
 public class PropertiesConfig {
