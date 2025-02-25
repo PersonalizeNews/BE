@@ -14,6 +14,9 @@ public enum ErrorCode {
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "회원을 찾을 수 없습니다."),
 
     SPOTIFY_EXCEPTION(HttpStatus.SERVICE_UNAVAILABLE, "스포티파이 라이브러리 사용 중 예외가 발생했습니다."),
+
+    WISHLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "위시리스트를 찾을 수 없습니다."),
+    WISHLIST_MEMBER_MISMATCH(HttpStatus.FORBIDDEN, "위시리스트를 생성한 유저와 로그인된 계정이 일치하지 않습니다"),
     ;
 
     private final HttpStatus httpStatus;
