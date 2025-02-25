@@ -27,10 +27,10 @@ public class WishlistController {
         return wishlistService.findAllWishlist();
     }
 
-    @PutMapping("/{wishlistId}")
+    @PatchMapping("/{wishlistId}")
     public ResponseEntity<Void> editWishlist(@PathVariable Long wishlistId,
-                                                   @RequestPart("title") String title,
-                                                   @RequestPart("image") MultipartFile file){
+                                                   @RequestPart(value = "title", required = false) String title,
+                                                   @RequestPart(value = "image", required = false) MultipartFile file){
         wishlistService.editWishlist(wishlistId, title, file);
 
         return ResponseEntity.ok().build();
