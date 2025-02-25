@@ -27,14 +27,19 @@ public class WishlistController {
         return wishlistService.findAllWishlist();
     }
 
-/*    @PutMapping("/{wishlistId}")
-    public List<WishlistInfoResponse> editWishlist(@PathVariable Long wishlistId){
-        return wishlistService.editWishlist(wishlistId);
-    }*/
+    @PutMapping("/{wishlistId}")
+    public ResponseEntity<Void> editWishlist(@PathVariable Long wishlistId,
+                                                   @RequestPart("title") String title,
+                                                   @RequestPart("image") MultipartFile file){
+        wishlistService.editWishlist(wishlistId, title, file);
+
+        return ResponseEntity.ok().build();
+    }
 
     @DeleteMapping("/{wishlistId}")
     public ResponseEntity<Void> deleteWishlist(@PathVariable Long wishlistId){
         wishlistService.deleteWishlist(wishlistId);
+
         return ResponseEntity.ok().build();
     }
 }

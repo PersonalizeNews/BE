@@ -10,7 +10,6 @@ import com.amcamp.global.error.exception.CustomException;
 import com.amcamp.global.error.exception.ErrorCode;
 import com.amcamp.global.util.MemberUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,6 +53,23 @@ public class WishlistService {
                 .stream()
                 .map(WishlistInfoResponse::from)
                 .toList();
+    }
+
+    public void editWishlist(Long wishlistId, String title, MultipartFile file) {
+        Member currentMember = memberUtil.getCurrentMember();
+        Wishlist wishlist = findWishlistById(wishlistId);
+
+        validateOwnership(wishlist, currentMember);
+
+        if (title != null && !title.isBlank()) {
+            wishlist.setTitle(title);
+        }
+
+        if (file != null && !file.isEmpty()) {
+            String imageUrl = imageService.uploadInitWishlistImage(file);
+            wishlist.setImageUrl(imageUrl);
+            imageService.storeImageInfo(imageUrl, wishlist.getId().toString());
+        }
     }
 
     private void validateOwnership(Wishlist wishlist, Member currentMember) {
