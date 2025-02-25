@@ -1,0 +1,6 @@
+spring:
+  config:
+    activate:
+      on-profile: "youtube"
+youtube:
+  api-key: ${YOUTUBE_API_KEY}
