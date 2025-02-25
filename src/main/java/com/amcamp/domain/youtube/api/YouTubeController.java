@@ -12,12 +12,12 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/youtube")
+@RequestMapping("/music")
 public class YouTubeController {
 
     private final YouTubeService youTubeService;
 
-    @GetMapping
+    @GetMapping("/youtube")
     public YouTubeVideoIdResponse getYouTubeLink(@RequestParam String query) throws IOException {
         return youTubeService.getYouTubeLink(query);
     }
