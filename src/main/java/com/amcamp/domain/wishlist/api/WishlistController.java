@@ -22,12 +22,12 @@ public class WishlistController {
        wishlistService.createWishlist(title, file);
     }
 
-/*    @GetMapping
+    @GetMapping
     public List<WishlistInfoResponse> findAllWishlist(){
         return wishlistService.findAllWishlist();
     }
 
-    @PutMapping("/{wishlistId}")
+/*    @PutMapping("/{wishlistId}")
     public List<WishlistInfoResponse> editWishlist(@PathVariable Long wishlistId){
         return wishlistService.editWishlist(wishlistId);
     }*/

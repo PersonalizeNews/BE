@@ -10,6 +10,7 @@ import com.amcamp.global.error.exception.CustomException;
 import com.amcamp.global.error.exception.ErrorCode;
 import com.amcamp.global.util.MemberUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,7 +44,16 @@ public class WishlistService {
 
         validateOwnership(wishlist, currentMember);
 
-        wishlistRepository.deleteById(wishlistId);
+        wishlistRepository.delete(wishlist);
+    }
+
+    public List<WishlistInfoResponse> findAllWishlist() {
+        Member currentMember = memberUtil.getCurrentMember();
+
+        return wishlistRepository.findByMember(currentMember)
+                .stream()
+                .map(WishlistInfoResponse::from)
+                .toList();
     }
 
     private void validateOwnership(Wishlist wishlist, Member currentMember) {

@@ -3,8 +3,12 @@ package com.amcamp.domain.wishlist.domain;
 
 import com.amcamp.domain.common.model.BaseTimeEntity;
 import com.amcamp.domain.member.domain.Member;
+import com.amcamp.domain.track.domain.Track;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +30,10 @@ public class Wishlist extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
+
+    @OneToMany(mappedBy = "wishlist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Track> tracks = new ArrayList<>();
+
 
     @Builder(access = AccessLevel.PRIVATE)
     private Wishlist(Member member, String title, String imageUrl) {
