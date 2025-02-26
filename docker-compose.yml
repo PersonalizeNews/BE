@@ -1,20 +1,59 @@
-version: "3.8"
-
 services:
-  backend:
-    image: ${IMAGE_FULL_URL}
-    container_name: ${DOCKERHUB_IMAGE_NAME}
+  mysql:
+    image: mysql:8-oracle
+    container_name: mysql
     restart: always
-    network_mode: host
+    ports:
+      - "3306:3306"
     environment:
-      - TZ=Asia/Seoul
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-network
+
+  spring-server:
+    image: ht3064/spring-server:latest
+    container_name: spring-server
+    hostname: spring-server
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
     env_file:
       - .env
+    networks:
+      - app-network
+
   redis:
-    image: "redis:alpine"
+    image: redis:alpine
     container_name: redis
+    command: redis-server --requirepass test --port 6379
+    restart: always
     ports:
       - "6379:6379"
-    network_mode: host
     environment:
       - TZ=Asia/Seoul
+    networks:
+      - app-network
+
+#  frontend:
+#    image: ht3064/frontend:latest
+#    container_name: frontend
+#    ports:
+#      - "5173:5173"
+#    networks:
+#      - app-network
+#    command: ["npm", "run", "dev", "--", "--host"]
+#
+networks:
+  app-network:
+    driver: bridge
