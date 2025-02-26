@@ -21,6 +21,9 @@ public class RedisConfig {
         RedisStandaloneConfiguration redisStandaloneConfig =
                 new RedisStandaloneConfiguration(redisProperties.host(), redisProperties.port());
 
+        if (!redisProperties.password().isBlank())
+            redisStandaloneConfig.setPassword(redisProperties.password());
+
         LettuceClientConfiguration lettuceClientConfig =
                 LettuceClientConfiguration.builder()
                         .commandTimeout(Duration.ofSeconds(1))
