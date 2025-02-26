@@ -1,7 +1,0 @@
-spring:
-  config:
-    activate:
-      on-profile: "spotify"
-spotify:
-  client-id: ${SPOTIFY_CLIENT_ID}
-  client-secret: ${SPOTIFY_CLIENT_SECRET}

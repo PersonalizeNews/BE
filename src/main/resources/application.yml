@@ -1,12 +1,12 @@
 spring:
   profiles:
+    active: "local"
     group:
       local: "local"
-      dev: "dev, datasource"
+      dev: "dev"
     include:
+      - datasource
       - security
       - redis
-      - gemini
-      - spotify
       - firebase
-      - youtube
+      - api
