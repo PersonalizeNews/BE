@@ -1,7 +1,0 @@
-spring:
-  config:
-    activate:
-      on-profile: "gemini"
-google:
-  gemini-baseurl: ${GEMINI_BASEURL}
-  api-key: ${GEMINI_API_KEY}
