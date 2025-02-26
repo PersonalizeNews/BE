@@ -15,7 +15,7 @@ public class ChatService {
     private final ChatInterface chatInterface;
     private final PromptGenerator promptGenerator;
 
-    private static final String MODEL = "gemini-pro";
+    private static final String MODEL = "gemini-2.0-flash-lite";
 
     private ChatResponse getCompletion(ChatRequest request) {
         return chatInterface.getCompletion(MODEL, request);
