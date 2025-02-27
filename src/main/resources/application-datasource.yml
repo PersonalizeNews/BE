@@ -13,7 +13,8 @@ spring:
         default_batch_fetch_size: 100
     hibernate:
       ddl-auto: none
-    database-platform: MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
+
 logging:
   level:
     org.hibernate.SQL: debug

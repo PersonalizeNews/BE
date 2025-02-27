@@ -36,7 +36,6 @@ services:
   redis:
     image: redis:alpine
     container_name: redis
-    command: redis-server --requirepass test --port 6379
     restart: always
     ports:
       - "6379:6379"
@@ -45,15 +44,15 @@ services:
     networks:
       - app-network
 
-#  frontend:
-#    image: ht3064/frontend:latest
-#    container_name: frontend
-#    ports:
-#      - "5173:5173"
-#    networks:
-#      - app-network
-#    command: ["npm", "run", "dev", "--", "--host"]
-#
+  react:
+    image: jaehongpark04/syncfit-react:latest
+    platform: linux/amd64
+    container_name: react
+    ports:
+      - "5173:80"
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
